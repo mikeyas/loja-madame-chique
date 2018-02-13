@@ -1,0 +1,73 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h1> Seus itens: </h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">REF</th>
+            <th>PRODUTO</th>
+            <th class="text-center">COR</th>
+            <th class="text-center">TAMANHO</th>
+            <th class="text-center">QUANT</th>
+            <th class="text-right">PREÇO UNIT</th>
+            <th class="text-right">PREÇO TOTAL</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+    	{% for produto in request.session.carrinho %}
+        <tr>
+            <td class="text-center" style="vertical-align: middle;">
+            {{produto.ref}}</td>
+            <td style="vertical-align: middle;">{{produto.produto|upper}}
+            </td>
+            <td class="text-center" style="vertical-align: middle;">
+            {{produto.cor|upper}}</td>
+            <td class="text-center" style="vertical-align: middle;">
+            {{produto.tamanho|upper}}</td>
+            <td class="text-center" style="vertical-align: middle;">
+            {{produto.quantidade}}</td>
+            <td class="text-right" style="vertical-align: middle;">
+            R$ {{produto.preco|floatformat:2}}</td>
+            <td class="text-right" style="vertical-align: middle;">
+            R$ {{produto.total|floatformat:2}}</td>
+            <td class="td-actions text-center" style="vertical-align: middle;">
+                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                    <i class="fa fa-times"></i>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+	</tbody>
+</table>
+
+	<div style="float: right;">
+		<form target="_self" method="post" 
+			action="https://sandbox.pagseguro.uol.com.br/checkout/checkout.jhtml"/>
+		  <input type="hidden" name="email_cobranca" value="mikeyas@gmail.com"/>
+		  <input type="hidden" name="tipo" value="CP"/>
+		  <input type="hidden" name="moeda" value="BRL"/>
+
+		  {% for produto in request.session.carrinho %}
+		  <input type="hidden" name="item_id_{{ forloop.counter }}" value="{{produto.ref}}"/>
+		  <input type="hidden" name="item_descr_{{ forloop.counter }}" value="{{produto.produto}}"/>
+		  <input type="hidden" name="item_quant_{{ forloop.counter }}" value="1"/>
+		  <input type="hidden" name="item_valor_{{ forloop.counter }}" value="{{produto.preco}}"/>
+		  <input type="hidden" name="item_frete_{{ forloop.counter }}" value="0"/>
+		  <input type="hidden" name="item_peso_{{ forloop.counter }}" value="0"/>
+		  {% endfor %}
+		  <input type="hidden" name="tipo_frete" value="EN"/>
+		  <input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/184x42-pagar-cinza-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+		</form>
+	</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript"
+src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js">
+</script>
+{% endblock %}

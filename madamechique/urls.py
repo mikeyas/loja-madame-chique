@@ -22,6 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'', include('produtos.urls')),
+    url(r'conta/', include('accounts.urls')),
+    url(r'^retorno/pagseguro/', include('pagseguro.urls')),
+    # a url de retorno será /retorno/pagseguro/
 ]
 
 if settings.DEBUG:

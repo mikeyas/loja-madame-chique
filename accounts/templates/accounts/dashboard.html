@@ -1,0 +1,52 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+<div class="col-md-12">
+	<!-- Tabs with icons on Card -->
+	<div class="card card-nav-tabs">
+		<div class="header header-success">
+			<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+			<div class="nav-tabs-navigation">
+				<div class="nav-tabs-wrapper">
+					<ul class="nav nav-tabs" data-tabs>
+						<li>
+							<a href="{% url 'profile' %}">
+								<i class="material-icons">fingerprint</i>
+								Meus Dados Cadastrais
+							</a>
+						</li>
+						<li>
+							<a href="{% url 'address' %}">
+								<i class="material-icons">email</i>
+								Meus Endereços
+							</a>
+						</li>
+						<li>
+							<a href="#settings">
+								<i class="material-icons">loyalty</i>
+								Meus Pedidos
+							</a>
+						<li>
+							<a href="#profile">
+								<i class="material-icons">lock</i>
+								Alterar Senha
+							</a>
+						</li>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			{% block dashboard_content %}
+			{% endblock %}
+		</div>
+	</div>
+	<!-- End Tabs with icons on Card -->
+</div>
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

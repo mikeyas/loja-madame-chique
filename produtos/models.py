@@ -18,6 +18,10 @@ class Produto (models.Model):
 	#foto 		= models.ImageField(upload_to = "img",blank=True)
 	disponivel	= models.BooleanField('Disponível', default=True)
 
+	@models.permalink
+	def get_absolute_url(self):
+		return('produto', (), {'slug':self.slug})
+
 	def __fotos__(self):
 		return FotoProduto.objects.filter(cod_produto=self.codigo)
 	fotos = __fotos__

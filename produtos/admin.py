@@ -7,7 +7,7 @@ class ProdutoAdmin (admin.ModelAdmin):
 	form = ProdutoForm
 	list_display = ['__str__', 'preco', 'tipo', 'categoria',]
 	search_fields = ['nome', 'slug', 'descricao', 'detalhe']
-	prepopulated_fields = {'slug':('nome',)}
+	prepopulated_fields = {'slug':('tipo', 'nome',)}
 	FotoProduto.foto
 
 admin.site.register(Produto, ProdutoAdmin)

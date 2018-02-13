@@ -17,8 +17,19 @@
 	background-color: #ffa0d2; fd0688 
 }
 
+.header-primary {
+  background-color: #ffa0d2 !important; fd0688 
+}
+
 .wrapper {
 	margin-top: 2.5cm; 
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.main {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .mh-100 {
@@ -72,54 +83,65 @@ li{
 
 li a{
     text-decoration: none;
-    display: inline-block;
+    display: unset;
 }
 
 li ul{
-    display: all;
+    display: grid;
 }
 
 li li a{
     margin-left: 5px;    
 }
 
+.vertalgn-middle{
+   vertical-align: middle;
+}
+
 .madamechique-cor {
   color: #fd0688
 }
 
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
-  src: local('Material Icons'),
-    local('MaterialIcons-Regular'),
-    url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
-    url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
-    url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+.card-rodape {
+    width:100%;
+    padding:8px 20px;
+    position:absolute;
+    bottom:0;
 }
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
+.justify {
+  text-align: justify-all;
+}
 
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
+ #carrinho {
+        position: fixed; /* posição absoluta ao elemento pai, neste caso o BODY */
+        /* Posiciona no meio, tanto em relação a esquerda como ao topo */
+        left: 98%; 
+        top: 22%;
+        width: auto; /* Largura da DIV */
+        height: auto; /* Altura da DIV */
+        /* A margem a esquerda deve ser menos a metade da largura */
+        /* A margem ao topo deve ser menos a metade da altura */
+        /* Fazendo isso, centralizará a DIV */
+        margin-left: -150px;
+        margin-top: -125px;
+        /*background-color: #FFF;
+        color: #FFF;
+        background-color: #666;
+        text-align: center; /* Centraliza o texto */
+        z-index: 1000; /* Faz com que fique sobre todos os elementos da página */
+    }
 
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
 
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+.modal:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal > div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 15px 20px;
+  background: #fff;
 }

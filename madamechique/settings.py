@@ -26,7 +26,7 @@ SECRET_KEY = 'ap)ng=##5qjk22ji2&lt!^n)j@f=x3l+we)yv_o$(a7fr!7(u-'
 DEBUG = True
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '<your_username>.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mikeyas.pythonanywhere.com']
 
 # Application definition
 
@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'madamechique',
     'produtos',
+    'pagseguro',
+    'accounts',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -119,12 +123,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'madamechique','media')
-MEDIA_URL = '/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+#PAGSEGURO_EMAIL = 'mikaelly.arquitetura@gmail.com'
+#PAGSEGURO_TOKEN = 'BC73A9DAAA2C489AAC86A231341A818A'
+PAGSEGURO_EMAIL = 'mikeyas@gmail.com'
+PAGSEGURO_TOKEN = '2A31986E8AAC4EFAB2F52DEA1E35E1A7'
+
+PAGSEGURO_SANDBOX = True # se o valor for True, as requisições a api serão feitas usando o PagSeguro Sandbox.
+PAGSEGURO_LOG_IN_MODEL = True # se o valor for True, os checkouts e transações vão ser logadas no database.
+
+#Auth
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'logout'

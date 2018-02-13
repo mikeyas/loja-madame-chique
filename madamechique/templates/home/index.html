@@ -1,0 +1,137 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+
+{% block carrinho %}
+            <div id="carrinho">
+              <a class="btn btn-round btn-info" href="{% url 'exibircarrinho' %}">
+                <i class="fa fa-shopping-cart"></i> 
+                <strong> 
+                ({{ request.session.carrinho|length }}) 
+              </strong> {% if request.session.carrinho|length > 1 %} 
+                        ITENS
+                        {% else %}
+                        ITEM
+                        {% endif %}
+              </a>
+            </div>
+{% endblock %}
+
+{% block menufilter %}  
+          <div class="col-lg-3">      
+            <ul class="nav">
+              <li>
+                <h3><strong>Filtrar por categoria:</strong></h3>
+              </li>
+              <li><a class="list-group-item" href="/"><strong>
+                  <i class="  fa fa-caret-right"></i>
+                  Todos os produtos
+                </strong></a>
+              </li>
+              {% for categoria in categorias %}
+              <li>
+                <a class="list-group-item"><strong>
+                  <i class="fa fa-sort-desc"></i>
+                  {{ categoria.nome }}
+                </strong></a>
+                <ul>
+                    {% for tipo in tipos %}
+                    {% for tipocat in tipo.categoria.all %}
+                    {% if tipocat.codigo == categoria.codigo %}
+                    <li>
+                      <a href="{% url 'searchproduto' categoria.codigo tipo.codigo %}"
+                        class="list-group-item">{{ tipo.nome }}
+                    </a>
+                    </li>
+                    {% endif  %}
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+              </li>
+              {% endfor %}
+            </ul>   
+          </div>     
+          <!-- /.col-lg-3 -->     
+{% endblock %}
+
+{% block content %}
+
+          <div class="col-lg-9">
+            <div class="row">
+              <nav class="navbar navbar-primary" style="text-align: center;">
+                <strong >Produtos Disponíveis </strong>
+              </nav>
+              {% for produto in produtos %}
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card-2 h-100">
+                  <a href="{% url 'produto' produto.slug %}">
+                  {% if produto.fotos %} 
+                  <div id="carousel-produto-{{produto.codigo}}" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      {% for foto in produto.fotos %}
+                      <div class="item {% if foto.codigo == produto.fotos.0.codigo %} active {% endif %}">
+                        <img  class="card-img-top" 
+                              src="{{ foto.foto.url  }}" 
+                              alt="{{ produto.nome }}">
+                      </div>
+                      {% endfor %}
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" 
+                    href="#carousel-produto-{{produto.codigo}}" data-slide="prev">
+                      <i class="material-icons">keyboard_arrow_left</i>
+                    </a>
+                    <a class="right carousel-control" 
+                    href="#carousel-produto-{{produto.codigo}}" data-slide="next">
+                      <i class="material-icons">keyboard_arrow_right</i>
+                    </a>
+                  </div>
+                    
+                  {% else %}
+                    <img class="card-img-top" 
+                    src="{% static 'img/avatar.jpg'%}" 
+                    alt="{{ produto.nome }}">
+                  {% endif %}
+                  </a>
+                  <div class="justify card-body">
+                    <h4 class="card-title">
+                      <a href="{{ produto.get_absolute_url }}">{{ produto }}</a>
+                    </h4>
+                    <h5><strong>R$ {{ produto.preco|floatformat:2 }}</strong></h5>
+
+                    <p class="card-body justify">{{ produto.descricao|slice:"0:130"|linebreaks }}</p>
+                  </div>
+                  <div class="card-footer card-rodape" >
+                    <a class="btn btn-round btn-xs footer" 
+                        style="width: 49%; float: left; "
+                        href="{{ produto.get_absolute_url }}">
+                        DETALHES
+                    </a>
+                    <a class="btn btn-round btn-xs btn-primary footer" 
+                        style="width: 49%; float: rigth; "
+                        href="{% url 'carrinho' produto.codigo %}">
+                        COMPRAR
+                    </a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.col-lg-9 -->
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript">
+    $('#carousel-produto-foto').carousel({
+        pause: true,
+        interval: false,
+    });
+
+  </script>
+{% endblock %}
+

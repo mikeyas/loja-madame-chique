@@ -1,0 +1,61 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block content %}
+<br><br><br><br>
+		<div class="section section-full-screen section-signup" >
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<div class="card card-signup">
+							<form class="form" method="POST">
+								{% csrf_token %}
+								<div class="header bkgd-color header-primary text-center">
+									<h3>Registre-se:</h3>
+								</div>
+								<div class="content">
+									{% if form.non_field_errors %}
+									<div class="alert alert-danger">
+						             <div class="container-fluid">
+										 <div class="alert-icon">
+											<i class="material-icons">error_outline</i>
+										</div>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true"><i class="material-icons">clear</i></span>
+										</button>
+						                 <b>{{ form.non_field_errors }}</b> 
+						             </div>
+						        	</div>
+						            {% endif %}
+						        </div>
+									{% for field in form %}
+									<div class="input-group">
+										<span class="input-group-addon">
+											{{field.label_tag}}
+										</span>
+										{{ field|add_class:"form-control" }}
+										{{ field.errors }}
+									</div>
+									{% endfor %}
+									
+									<!-- If you want to add a checkbox to this form, uncomment this code
+
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" name="optionsCheckboxes" checked>
+											Subscribe to newsletter
+										</label>
+									</div> -->
+								<div class="footer text-center">
+									<button type="submit" class="btn btn-simple btn-primary btn-lg">Registrar</button>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+{% endblock %}

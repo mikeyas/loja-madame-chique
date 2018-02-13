@@ -13,5 +13,9 @@ class ProdutoForm(ModelForm):
 	descricao  	= forms.CharField()
 	detalhe    	= forms.CharField()
 	preco      	= forms.FloatField()
-	
+
 	model = Produto
+
+class FotoProdutoForm(ModelForm):
+	foto = forms.ImageField()
+	model = FotoProduto
