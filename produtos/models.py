@@ -15,6 +15,7 @@ class Produto (models.Model):
 	descricao  	= models.TextField('Descrição', blank=True)
 	detalhe    	= models.CharField(max_length=50, blank=True, null=True)
 	preco      	= models.FloatField('Preço', blank=False, null=False)
+	#preco      	= models.DecimalField('Preço', blank=False, null=False, max_digits=6, decimal_places=2)
 	#foto 		= models.ImageField(upload_to = "img",blank=True)
 	disponivel	= models.BooleanField('Disponível', default=True)
 

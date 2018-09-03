@@ -26,7 +26,7 @@ SECRET_KEY = 'ap)ng=##5qjk22ji2&lt!^n)j@f=x3l+we)yv_o$(a7fr!7(u-'
 DEBUG = True
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mikeyas.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mikeyas.pythonanywhere.com', 'a34e6164.ngrok.io', 'https://a34e6164.ngrok.io', 'http://a34e6164.ngrok.io']
 
 # Application definition
 
@@ -37,11 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
+    'pagseguro',
     'madamechique',
     'produtos',
-    'pagseguro',
     'accounts',
-    'widget_tweaks',
+    'pedidos',
 ]
 
 MIDDLEWARE = [
@@ -134,13 +135,27 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-#PAGSEGURO_EMAIL = 'mikaelly.arquitetura@gmail.com'
-#PAGSEGURO_TOKEN = 'BC73A9DAAA2C489AAC86A231341A818A'
-PAGSEGURO_EMAIL = 'mikeyas@gmail.com'
-PAGSEGURO_TOKEN = '2A31986E8AAC4EFAB2F52DEA1E35E1A7'
+CORS_ORIGIN_WHITELIST = (
+    'google.com',
+    'hostname.example.com',
+    'https://sandbox.pagseguro.uol.com.br',
+    'https://d458dce1.ngrok.io',
+    'http://d458dce1.ngrok.io'
+)
 
 PAGSEGURO_SANDBOX = True # se o valor for True, as requisições a api serão feitas usando o PagSeguro Sandbox.
+
+if PAGSEGURO_SANDBOX: #Ambiente DEV
+    PAGSEGURO_EMAIL = 'mikeyas@gmail.com'
+    PAGSEGURO_TOKEN = '2A31986E8AAC4EFAB2F52DEA1E35E1A7'
+
+else: #Ambiente PRODUCAO
+    PAGSEGURO_EMAIL = 'mikaelly.arquitetura@gmail.com'
+    PAGSEGURO_TOKEN = 'BC73A9DAAA2C489AAC86A231341A818A'
+
 PAGSEGURO_LOG_IN_MODEL = True # se o valor for True, os checkouts e transações vão ser logadas no database.
+SECURE_REDIRECT_EXEMPT = 'retorno/pagseguro/'
+PAGSEGURO_REFERENCE = 'MADAME-CHIQUE-LJ'
 
 #Auth
 LOGIN_URL = 'login'

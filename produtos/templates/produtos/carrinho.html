@@ -43,7 +43,7 @@
         {% endfor %}
 	</tbody>
 </table>
-
+    <a href="{% url 'pagamento' %}" class="btn btn-success">FINALIZAR COMPRA</a>
 	<div style="float: right;">
 		<form target="_self" method="post" 
 			action="https://sandbox.pagseguro.uol.com.br/checkout/checkout.jhtml"/>

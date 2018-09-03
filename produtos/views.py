@@ -44,7 +44,7 @@ def carrinho(request, cod_produto=None):
 	produtos = Produto.objects.filter(disponivel=True)
 	tipos = Tipo.objects.all()
 	categorias = Categoria.objects.all()
-
+	request.session.set_expiry(0)
 	carrinho = []
 	if cod_produto:
 		p = Produto.objects.get(codigo=cod_produto)
@@ -69,3 +69,4 @@ def carrinho(request, cod_produto=None):
 										'categorias': categorias,
 										'tipos': tipos,
 										})
+
