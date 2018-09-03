@@ -151,7 +151,7 @@ if PAGSEGURO_SANDBOX: #Ambiente DEV
 
 else: #Ambiente PRODUCAO
     PAGSEGURO_EMAIL = 'mikaelly.arquitetura@gmail.com'
-    PAGSEGURO_TOKEN = 'BC73A9DAAA2C489AAC86A231341A818A'
+    PAGSEGURO_TOKEN = '***********************'
 
 PAGSEGURO_LOG_IN_MODEL = True # se o valor for True, os checkouts e transações vão ser logadas no database.
 SECURE_REDIRECT_EXEMPT = 'retorno/pagseguro/'
